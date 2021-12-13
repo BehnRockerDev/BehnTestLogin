@@ -1,16 +1,19 @@
 Feature: Test Site Login
 
+  @Smoke
   Scenario: As a user, I can log into the website
     Given I am on the login page
     When I login with correct credentials
     Then I am redirected to the home page
       And I see a confirmation message
 
+  @Smoke
   Scenario: As a user, I cannot log in with invalid credentials
     Given I am on the login page
     When I login with incorrect credentials
     Then I see an authentication error message
 
+  @Regression
   Scenario: As a user, I am able to reset the login form
     Given I am on the login page
     When I login with incorrect credentials
@@ -18,6 +21,7 @@ Feature: Test Site Login
     Then The form is reset to default
       And The authentication error message disappears
 
+  @Regression
   Scenario: As a user, I can complete the login flow using toolbar navigation
     Given I am on the home page
     When I navigate to the login page via the toolbar
@@ -25,6 +29,7 @@ Feature: Test Site Login
     Then I am redirected to the home page
       And I see a confirmation message
 
+  @Regression
   Scenario: As a user, I can complete the login flow using side bar navigation
     Given I am on the home page
     When I navigate to the login page via the sidebar
@@ -32,6 +37,7 @@ Feature: Test Site Login
     Then I am redirected to the home page
     And I see a confirmation message
 
+  @Regression
   Scenario Outline: As a user, the homepage displays a message which varies based on my logged in status
     Given I am on the login page
     When I login with <username> and <password>
@@ -42,6 +48,7 @@ Feature: Test Site Login
       | testuser | password123 | You are logged in! Welcome, Testy McUser |
       | baduser  | badpassword | You are not logged in                    |
 
+  @Smoke
   Scenario: As a user, if I open a non-existent page, I am shown an error
     Given I am on the home page
     When I open a page that doesn't exist
