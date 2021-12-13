@@ -11,7 +11,7 @@ const pages = {
 }
 
 Given(/^I am on the (\w+) page$/, async (page) => {
-    await pages[page].open()
+    await pages[page].open();
 });
 
 When(/I login with correct credentials/, async () => {
@@ -27,35 +27,36 @@ When(/I click the reset button/, async () => {
 });
 
 When(/I navigate to the login page via the toolbar/, async () => {
-    await HomePage.navigateToLoginPageWithToolbar();
+    await LoginPage.navigateToLoginPageWithToolbar();
 });
 
 When(/I navigate to the login page via the sidebar/, async () => {
-    await HomePage.navigateToLoginPageWithSidenav();
+    await LoginPage.navigateToLoginPageWithSidenav();
 });
 
 When(/^I login with (\w+) and (.+)$/, async (username, password) => {
-    await LoginPage.login(username, password)
+    await LoginPage.login(username, password);
 });
 
 When(/I open the home page/, async () => {
-    await HomePage.open();
+    await HomePage.navigateToHomePageWithToolbar();
 });
 
 When(/I open a page that doesn't exist/, async () => {
-    await NotFoundPage.open()
+    await NotFoundPage.open();
 });
 
 Then(/I am redirected to the home page/, async () => {
-    await expect(HomePage.messageArea).toBeDisplayed()
+    await expect(HomePage.messageArea).toBeDisplayed();
 });
 
 Then(/I see a confirmation message/, async () => {
-    await expect(HomePage.messageArea).toHaveTextContaining("You are logged in! Welcome");
+    await expect(HomePage.signedInMessage).toHaveTextContaining("You are logged in! Welcome");
 });
 
 Then(/I see an authentication error message/, async () => {
-    await expect(HomePage.messageArea).toHaveTextContaining("You are not logged in");
+    await expect(LoginPage.messageAreaIsDisplayed()).toBeTruthy();
+    await expect(LoginPage.messageArea).toHaveTextContaining("Incorrect username and/or password")
 });
 
 Then(/The form is reset to default/, async () => {
@@ -67,9 +68,16 @@ Then(/The authentication error message disappears/, async () => {
 });
 
 Then(/^I should see a message saying (.*)$/, async (message) => {
-    await expect(HomePage.messageArea).toHaveTextContaining(message);
+    await expect(HomePage.messageArea).toBeDisplayed();
+    if (await HomePage.signedInMessage.isDisplayed()) {
+        await expect(HomePage.signedInMessage).toHaveTextContaining(message);
+    } else {
+        await expect(HomePage.signedOutMessage).toHaveTextContaining(message);
+    }
+
 });
 
-Then(/I should be shown an error message/, async (message) => {
-    await expect(NotFoundPage.messageArea).toHaveTextContaining("Page not found")
+Then(/I should be shown an error message/, async () => {
+    await expect(NotFoundPage.messageArea).toBeDisplayed();
+    await expect(NotFoundPage.messageArea).toHaveTextContaining("Page not found");
 });

@@ -38,9 +38,23 @@ class LoginPage extends Page {
         await this.submitButton.click();
     }
 
+    public async messageAreaIsDisplayed(): Promise<boolean> {
+        expect(this.messageArea).toBeDisplayed();
+        return true;
+    }
+
     public async messageAreaIsNotDisplayed(): Promise<boolean> {
         !expect(this.messageArea).toBeDisplayed();
         return true;
+    }
+
+    public async navigateToLoginPageWithToolbar(): Promise<void> {
+        await this.ToolbarLoginLink.click();
+    }
+
+    public async navigateToLoginPageWithSidenav(): Promise<void> {
+        await this.ToolbarHamburgerButton.click();
+        await this.ToolbarLoginLink.click();
     }
 
     //Goes directly to the page. Uses the parent class open() method

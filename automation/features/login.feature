@@ -33,14 +33,14 @@ Feature: Test Site Login
     And I see a confirmation message
 
   Scenario Outline: As a user, the homepage displays a message which varies based on my logged in status
-    Given I am on the home page
+    Given I am on the login page
     When I login with <username> and <password>
       And I open the home page
     Then I should see a message saying <message>
     Examples:
-      | username | password    | message                        |
-      | testuser | password123 | You logged into a secure area! |
-      | baduser  | badpassword | Your username is invalid!      |
+      | username | password    | message                                  |
+      | testuser | password123 | You are logged in! Welcome, Testy McUser |
+      | baduser  | badpassword | You are not logged in                    |
 
   Scenario: As a user, if I open a non-existent page, I am shown an error
     Given I am on the home page

@@ -8,13 +8,16 @@ class HomePage extends Page {
         return $('#userLoggedInMessage');
     }
 
-    public async navigateToLoginPageWithToolbar(): Promise<void> {
-        await this.ToolbarLoginLink.click();
+    public get signedInMessage(): ChainablePromiseElement<Promise<WebdriverIO.Element>> {
+        return $('#signedInMessage');
     }
 
-    public async navigateToLoginPageWithSidenav(): Promise<void> {
-        await this.ToolbarHamburgerButton.click();
-        await this.ToolbarLoginLink.click();
+    public get signedOutMessage(): ChainablePromiseElement<Promise<WebdriverIO.Element>> {
+        return $('#signedOutMessage');
+    }
+
+    public async navigateToHomePageWithToolbar(): Promise<void> {
+        await this.ToolbarHomeLink.click();
     }
 
     //Goes directly to the page. Uses the parent class open() method
