@@ -1,0 +1,21 @@
+<h2>Login</h2>
+
+<form [formGroup]="loginForm">
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" id="username" type="text" class="form-control">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" id="password" type="text" class="form-control">
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="onSubmit()" class="btn btn-primary">Login</button>
+  <button mat-raised-button color="white" (click)="onReset()" class="btn btn-secondary">Reset</button>
+</form>
+<!-- Error message appears when the login has failed due to bad username/password combo -->
+<div [hidden]="!submitted && !userService.currentUserIsLoggedIn()" id="failedLoginMessage">Incorrect username and/or password</div>

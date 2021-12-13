@@ -1,0 +1,7 @@
+<div id="userLoggedInStatus">
+  <!-- If the user object in userService is logged out, a prompt to sign in is shown -->
+  <div [hidden]="userService.currentUserIsLoggedIn()" id="signedOutMessage">You are not logged in</div>
+  <!-- If the user object in userService is logged in, a welcome message is shown with the user's name -->
+  <!-- Force-unwrapped, as the object definitely exists if it is flagged as logged in -->
+  <div [hidden]="!userService.currentUserIsLoggedIn()" id="signedInMessage">You are logged in! Welcome, {{userService.currentUsersName()}}</div>
+</div>
