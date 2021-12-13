@@ -18,6 +18,13 @@ Feature: Test Site Login
     Then The form is reset to default
       And The authentication error message disappears
 
+  Scenario: As a user, I can complete the login flow using toolbar navigation
+    Given I am on the home page
+    When I navigate to the login page via the toolbar
+      And I login with correct credentials
+    Then I am redirected to the home page
+      And I see a confirmation message
+
   Scenario: As a user, I can complete the login flow using side bar navigation
     Given I am on the home page
     When I navigate to the login page via the sidebar

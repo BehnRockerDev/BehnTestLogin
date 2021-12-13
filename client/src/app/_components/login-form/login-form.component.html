@@ -14,8 +14,8 @@
       <input matInput formControlName="password" id="password" type="text" class="form-control">
     </mat-form-field>
   </div>
-  <button mat-raised-button color="primary" (click)="onSubmit()" class="btn btn-primary">Login</button>
-  <button mat-raised-button color="white" (click)="onReset()" class="btn btn-secondary">Reset</button>
+  <button id="submit" mat-raised-button color="primary" (click)="onSubmit()" class="btn btn-primary">Login</button>
+  <button id="reset" mat-raised-button color="white" (click)="onReset()" class="btn btn-secondary">Reset</button>
 </form>
 <!-- Error message appears when the login has failed due to bad username/password combo -->
-<div [hidden]="!submitted && !userService.currentUserIsLoggedIn()" id="failedLoginMessage">Incorrect username and/or password</div>
+<div [hidden]="!submitted && !userService.currentUserIsLoggedIn()" id="messageArea">Incorrect username and/or password</div>
